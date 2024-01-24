@@ -1,0 +1,27 @@
+Package: Bioc4AnVIL
+Date: 2024-01-16
+Title: Vignettes and data for Bioconductor in AnVIL
+Version: 0.0.0
+Authors@R: 
+    c(person(
+        "Vincent", "Carey", role = c("aut", "cre"),
+        email = "stvjc@channing.harvard.edu",
+        comment = c(ORCID = "0000-0003-4046-0063")
+     )
+    )
+Description: This package is focused on providing insight
+	on how Bioconductor and NHGRI AnVIL can be symbiotic.
+	This package will be the basis of a managed workspace
+	with QA processes that can be emulated in research
+	workspaces.  This package will include vignettes
+	that work through operations with key Bioconductor
+	resources.
+License: Artistic-2.0
+Encoding: UTF-8
+Depends: R (>= 4.1), scRNAseq, BiocStyle
+Suggests: knitr, testthat, quarto
+VignetteBuilder: quarto
+biocViews: Infrastructure
+RoxygenNote: 7.2.3
+URL: https://github.com/bioconductor/Bioc4AnVIL
+BugReports: https://github.com/bioconductor/Bioc4AnVIL/issues

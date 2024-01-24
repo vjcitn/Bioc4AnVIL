@@ -1,0 +1,88 @@
+---
+title: "Bioc4AnVIL overview"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{quarto::html}
+  %\VignetteIndexEntry{Bioc4AnVIL overview}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+bibliography: 
+  - "`r system.file('scripts', 'ref.bib', package='scRNAseq')`"
+  - bunis.bib
+---
+
+# Bioc4AnVIL purpose
+
+The objective of this package is to motivate
+Bioconductor users to understand and use NHGRI AnVIL,
+and to motivate NHGRI AnVIL users to appreciate
+resources provided by Bioconductor.
+
+# Example 1: Exploring single-cell RNA-seq experiments
+
+## A data library
+
+Package `r BiocStyle::Biocpkg("scRNAseq")` can be used to acquire
+data on `r nrow(scRNAseq::listDatasets())` experiments.
+
+```{r getsc, message=FALSE}
+library(scRNAseq)
+```
+
+The `listDatasets` function produces the data for
+this table:
+
+```{r, echo=FALSE, message=FALSE}
+# derived from scRNAseq vignette
+out <- listDatasets()
+out <- as.data.frame(out)
+out$Taxonomy <- c(`10090`="Mouse", `9606`="Human", `8355`="Xenopus")[as.character(out$Taxonomy)]
+out$Reference <- sprintf("[%s]", out$Reference)
+out$Call <- sprintf("`%s`", out$Call)
+out$Number = as.character(out$Number)
+library(kableExtra)
+knitr::kable(out) %>% 
+    column_spec(1, width="52em") %>% 
+    column_spec(2, width="13em") %>% 
+    column_spec(3, width="11em") %>% 
+    column_spec(4, width="10em") %>% 
+    column_spec(5, width="13em") %>% 
+    scroll_box(width="100%", height="250px")
+```
+
+```{r zzz}
+DT::datatable(out[,-1])
+```
+
+Here I go: [@aztekin2019identification]
+
+
+<span data-qmd="[@aztekin2019identification]"/>
+```{r tst}
+mydf = data.frame(ref="[@aztekin2019identification]", n=1)
+knitr::kable(mydf)
+```
+
+## Retrieving Bach's mammary cell data
+
+The function call presented here will obtain
+and cache for future use a representation
+of the data used in 
+
+```{r dobach,message=FALSE, eval=FALSE}
+bmam = BachMammaryData()
+bmam
+```
+
+This paper includes the following comment
+summarizing design and yield.
+
+> We isolated mammary epithelial cells from four developmental time points; nulliparous (NP), day 14.5 gestation (G), day 6 lactation (L) and 11 days post natural involution (PI). For each time point, we sorted mammary epithelial cells based on the EpCAM cell surface marker from two independent mice (Supplementary Fig. 1; Fig. 1a). All samples were then prepared for scRNAseq using the 10× Chromium platform17. Following quality control (Methods), this yielded an average of 6175 unique transcripts and 2118 genes detected from 25,010 cells (4223 in NP, 5826 in G, 9319 in L and 5642 in P) with high reproducibility between the biological replicates (Supplementary Figs. 2 and 3). 
+
+# References
